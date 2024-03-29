@@ -103,9 +103,9 @@ static int SendMessage(lua_State* L)
 
 	std::vector<unsigned char> message;
 	message.resize(3);
-	message[0] = luaL_checkint(L, 2);
-	message[1] = luaL_checkint(L, 3);
-	message[2] = luaL_checkint(L, 4);
+	message[0] = luaL_checkint(L, 1);
+	message[1] = luaL_checkint(L, 2);
+	message[2] = luaL_checkint(L, 3);
 	
 	g_midiout->sendMessage(&message);
 	return 0;
