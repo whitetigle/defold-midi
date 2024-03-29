@@ -86,20 +86,27 @@ static int SendMessage(lua_State* L)
 {
 	DM_LUA_STACK_CHECK(L, 0);
 
- 	std::vector<unsigned char> message;
-	while (true) {
-		int index = message.size();
-		lua_pushinteger(L, index + 1);
-		lua_gettable(L, -2);
-		if (lua_type(L, -1) == LUA_TNIL)
-		{
-			break;
-		}
-		lua_Number v = luaL_checknumber(L, -1);
-		message.push_back(v);
-		lua_pop(L, 1);
-	}
+	
+ // 	std::vector<unsigned char> message;
+	// while (true) {
+	// 	int index = message.size();
+	// 	lua_pushinteger(L, index + 1);
+	// 	lua_gettable(L, -2);
+	// 	if (lua_type(L, -1) == LUA_TNIL)
+	// 	{
+	// 		break;
+	// 	}
+	// 	lua_Number v = luaL_checknumber(L, -1);
+	// 	message.push_back(v);
+	// 	lua_pop(L, 1);
+	// }
 
+	std::vector<unsigned char> message;
+	message.resize(3);
+	message[0] = luaL_checkint(L, 2);
+	message[1] = luaL_checkint(L, 3);
+	message[2] = luaL_checkint(L, 4);
+	
 	g_midiout->sendMessage(&message);
 	return 0;
 }
